@@ -3,9 +3,7 @@ package com.oocl.demo.controller;
 import com.oocl.demo.model.Employee;
 import com.oocl.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -33,5 +31,10 @@ public class EmployeeController {
     @GetMapping(path = "/employees/male")
     public ArrayList<Employee> getEmployeeBygender(){
         return employeeService.getEmployeeBygender();
+    }
+
+    @PostMapping(path = "/employees")
+    public ArrayList<Employee> postEmployee(@RequestBody Employee employee) {
+        return employeeService.postEmployee(employee);
     }
 }

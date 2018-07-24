@@ -36,4 +36,14 @@ public class EmployeeService {
         }
         return filterList;
     }
+
+    public ArrayList<Employee> postEmployee(Employee employee) {
+        Employee newEmployee = new Employee(employee.getId(),
+                employee.getName(),
+                employee.getAge(),
+                employee.getGender(),
+                employee.getSalary());
+        list.add(newEmployee);
+        return list;
+    }
 }
