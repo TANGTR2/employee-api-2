@@ -1,0 +1,36 @@
+package com.oocl.demo.service;
+
+import com.oocl.demo.model.Company;
+import com.oocl.demo.model.Employee;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+
+@Service
+public class CompanyService {
+    ArrayList<Employee> employeeslist1 = new ArrayList<>();
+    ArrayList<Employee> employeeslist2 = new ArrayList<>();
+    {
+        Employee employee1 = new Employee(4,"alibaba1",20,"male",6000);
+        Employee employee2 = new Employee(11,"alibaba2",19,"female",7000);
+        employeeslist1.add(employee1);employeeslist1.add(employee2);
+    }
+    {
+        Employee employee1 = new Employee(5,"tengxun1",20,"female",6000);
+        Employee employee2 = new Employee(10,"tengxun2",19,"female",7000);
+        employeeslist2.add(employee1);employeeslist2.add(employee2);
+    }
+
+    private ArrayList<Company> companieslist = new ArrayList<>();
+    {
+        Company company1 = new Company("alibaba",2,this.employeeslist1);
+        Company company2 = new Company("tengxun",2,this.employeeslist2);
+        companieslist.add(company1);
+        companieslist.add(company2);
+    }
+
+    public ArrayList<Company> getCompaniesList() {
+        System.out.println(companieslist);
+        return companieslist;
+    }
+}
