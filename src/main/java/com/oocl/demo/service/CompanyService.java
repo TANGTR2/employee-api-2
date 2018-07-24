@@ -60,4 +60,9 @@ public class CompanyService {
         }
         return dispacth;
     }
+
+    public ArrayList<Company> postCompany(Company company) {
+        companieslist.add(company);
+        return companieslist;
+    }
 }

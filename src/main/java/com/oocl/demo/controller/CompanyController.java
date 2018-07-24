@@ -5,9 +5,7 @@ import com.oocl.demo.model.Employee;
 import com.oocl.demo.service.CompanyService;
 import com.oocl.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -38,6 +36,11 @@ public class CompanyController {
     @GetMapping("/companies/page/{page}/pageSize/{pageSize}")
     public ArrayList<Company> getCompaniesByPage(@PathVariable int page,@PathVariable int pageSize){
         return  companyService.getCompaniesByPage(page,pageSize);
+    }
+
+    @PostMapping(path = "/companies")
+    public ArrayList<Company> postCompany(@RequestBody Company company) {
+        return companyService.postCompany(company);
     }
 
 }
