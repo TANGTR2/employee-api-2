@@ -26,4 +26,14 @@ public class EmployeeService {
         }
         return null;
     }
+
+    public ArrayList<Employee> getEmployeeBygender() {
+        ArrayList<Employee> filterList = new ArrayList<>();
+        for(Employee employee:list){
+            if(employee.getGender().equals("male")){
+                filterList.add(employee);
+            }
+        }
+        return filterList;
+    }
 }
