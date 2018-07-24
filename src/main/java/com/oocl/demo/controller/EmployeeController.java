@@ -42,4 +42,9 @@ public class EmployeeController {
     public ArrayList<Employee> putEmployeeById(@RequestBody Employee employee){
         return employeeService.updateEmployeeById(employee);
     }
+
+    @DeleteMapping(path = "/employees/{id}")
+    public  ArrayList<Employee> deleteEmployeeById(@PathVariable int id){
+        return employeeService.deleteEmployeeById(id);
+    }
 }

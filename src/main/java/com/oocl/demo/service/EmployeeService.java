@@ -58,4 +58,13 @@ public class EmployeeService {
         }
         return list;
     }
+
+    public ArrayList<Employee> deleteEmployeeById(int id) {
+        for(Employee e:list){
+            if(e.getId() == id){
+                list.remove(e);
+            }
+        }
+        return list;
+    }
 }
