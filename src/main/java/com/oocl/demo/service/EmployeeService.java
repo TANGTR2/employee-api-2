@@ -17,4 +17,13 @@ public class EmployeeService {
     public ArrayList<Employee> getEmployeesList() {
         return list;
     }
+
+    public Employee getEmployeeById(int id) {
+        for(Employee employee:list){
+            if(employee.getId() == id){
+                return employee;
+            }
+        }
+        return null;
+    }
 }
