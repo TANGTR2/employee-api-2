@@ -29,4 +29,10 @@ public class CompanyController {
     public Company getCompaniesByName(@PathVariable String companyName){
         return companyService.getCompaniesByName(companyName);
     }
+
+    @GetMapping(path = "/companies/{companyName}/employees")
+    public ArrayList<Employee> getCompanyEmployeesByName(@PathVariable String companyName){
+        return companyService.getCompanyEmployeesByName(companyName);
+    }
+
 }

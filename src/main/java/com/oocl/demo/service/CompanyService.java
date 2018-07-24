@@ -41,4 +41,13 @@ public class CompanyService {
         }
         return null;
     }
+
+    public ArrayList<Employee> getCompanyEmployeesByName(String companyName) {
+        for(Company company:companieslist){
+            if(company.getCompanyName().equals(companyName)){
+                return company.getEmployeesList();
+            }
+        }
+        return null;
+    }
 }
