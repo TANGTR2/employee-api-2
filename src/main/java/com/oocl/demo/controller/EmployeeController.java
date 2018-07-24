@@ -37,4 +37,9 @@ public class EmployeeController {
     public ArrayList<Employee> postEmployee(@RequestBody Employee employee) {
         return employeeService.postEmployee(employee);
     }
+
+    @PutMapping(path = "/employees/{id}")
+    public ArrayList<Employee> putEmployeeById(@RequestBody Employee employee){
+        return employeeService.updateEmployeeById(employee);
+    }
 }

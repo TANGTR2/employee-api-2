@@ -46,4 +46,16 @@ public class EmployeeService {
         list.add(newEmployee);
         return list;
     }
+
+    public ArrayList<Employee> updateEmployeeById(Employee employee) {
+        for(Employee e:list){
+            if(e.getId() == employee.getId()){
+                e.setName(employee.getName());
+                e.setAge(employee.getAge());
+                e.setGender(employee.getGender());
+                e.setSalary(employee.getSalary());
+            }
+        }
+        return list;
+    }
 }
