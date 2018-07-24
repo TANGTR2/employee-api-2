@@ -30,7 +30,15 @@ public class CompanyService {
     }
 
     public ArrayList<Company> getCompaniesList() {
-        System.out.println(companieslist);
         return companieslist;
+    }
+
+    public Company getCompaniesByName(String companyName) {
+        for(Company company:companieslist){
+            if(company.getCompanyName().equals(companyName)){
+                return company;
+            }
+        }
+        return null;
     }
 }
