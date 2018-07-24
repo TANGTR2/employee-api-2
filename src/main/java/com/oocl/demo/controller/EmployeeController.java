@@ -47,4 +47,9 @@ public class EmployeeController {
     public  ArrayList<Employee> deleteEmployeeById(@PathVariable int id){
         return employeeService.deleteEmployeeById(id);
     }
+
+    @GetMapping("/employees/page/{page}/pageSize/{pageSize}")
+    public ArrayList<Employee> getEmployeesByPage(@PathVariable int page,@PathVariable int pageSize){
+        return  employeeService.getEmployeesByPage(page,pageSize);
+    }
 }
