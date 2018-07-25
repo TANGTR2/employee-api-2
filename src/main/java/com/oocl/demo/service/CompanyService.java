@@ -65,4 +65,24 @@ public class CompanyService {
         companieslist.add(company);
         return companieslist;
     }
+
+    public ArrayList<Company> updateCompanyByName(Company company) {
+        for(Company e:companieslist){
+            if(e.getCompanyName().equals(company.getCompanyName())){
+                e.setCompanyName(company.getCompanyName());
+                e.setEmployeesNumber(company.getEmployeesNumber());
+                e.setEmployeesList(company.getEmployeesList());
+            }
+        }
+        return companieslist;
+    }
+
+    public ArrayList<Company> deleteCompanyByName(String companyName) {
+        for(Company e:companieslist){
+            if(e.getCompanyName().equals(companyName)){
+                companieslist.remove(e);
+            }
+        }
+        return companieslist;
+    }
 }

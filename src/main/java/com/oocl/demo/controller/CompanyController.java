@@ -43,4 +43,14 @@ public class CompanyController {
         return companyService.postCompany(company);
     }
 
+    @PutMapping(path = "/companies/{companyName}")
+    public ArrayList<Company> putCompanyByName(@RequestBody Company company){
+        return companyService.updateCompanyByName(company);
+    }
+
+    @DeleteMapping(path = "/companies/{companyName}")
+    public ArrayList<Company> deleteCompanyByName(@PathVariable String companyName){
+        return companyService.deleteCompanyByName(companyName);
+    }
+
 }
