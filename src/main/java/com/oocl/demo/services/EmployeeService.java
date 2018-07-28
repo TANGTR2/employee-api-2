@@ -25,10 +25,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-//    public Optional<Employee> getEmployeeById(Long id) {
-//        return employeeRepository.findById(id);
-//    }
-//
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).get();
+    }
+
 //    public ArrayList<Employee> getEmployeeBygender() {
 //        ArrayList<Employee> filterList = new ArrayList<>();
 //        for (Employee employee : list) {

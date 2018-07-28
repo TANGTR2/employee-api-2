@@ -31,11 +31,13 @@ public class TestEmployeeController {
 
     @Test
     public void getEmployee_ReturnEmployeeDetails() throws Exception{
+        //given
         ArrayList<Employee> employees = new ArrayList<>();
         Employee employee = new Employee("alibaba1",20,"male",6000);
         employees.add(employee);
+        //when
         given(employeeService.getEmployeesList()).willReturn(employees);
-
+        //then
         mockMvc.perform(get("/employees")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name").value("alibaba1"))
@@ -44,17 +46,20 @@ public class TestEmployeeController {
                 .andExpect(jsonPath("$[0].salary").value(6000));
     }
 
-//    @Test
-//    public void getEmployeeById_ReturnEmployee() throws Exception{
-//        Employee employee = new Employee("alibaba",20,"male",6000);
-////        given(employeeService.getEmployeeById(employee.getId())).willReturn();
-//
-//        mockMvc.perform(get("/employees/4")).andExpect(status().isOk())
-//                .andExpect(jsonPath("name").value("alibaba"))
-//                .andExpect(jsonPath("age").value(20))
-//                .andExpect(jsonPath("gender").value("male"))
-//                .andExpect(jsonPath("salary").value(6000));
-//    }
+    @Test
+    public void getEmployeeById_ReturnEmployee() throws Exception{
+        //given
+        long id = 1L;
+        Employee employee = new Employee("alibaba",20,"male",6000);
+        //when
+        given(employeeService.getEmployeeById(id)).willReturn(employee);
+        //then
+        mockMvc.perform(get("/employees/1")).andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("alibaba"))
+                .andExpect(jsonPath("age").value(20))
+                .andExpect(jsonPath("gender").value("male"))
+                .andExpect(jsonPath("salary").value(6000));
+    }
 
 //    @Test
 //    public void getEmployeeBygender_ReturnEmployees() throws Exception{
