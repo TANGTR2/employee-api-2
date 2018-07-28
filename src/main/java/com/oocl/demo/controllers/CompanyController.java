@@ -1,9 +1,9 @@
-package com.oocl.demo.controller;
+package com.oocl.demo.controllers;
 
-import com.oocl.demo.model.Company;
-import com.oocl.demo.model.Employee;
-import com.oocl.demo.service.CompanyService;
-import com.oocl.demo.service.EmployeeService;
+import com.oocl.demo.entities.Company;
+import com.oocl.demo.entities.Employee;
+import com.oocl.demo.services.CompanyService;
+import com.oocl.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.oocl.demo.model;
+package com.oocl.demo.entities;
 
 import org.springframework.stereotype.Service;
 

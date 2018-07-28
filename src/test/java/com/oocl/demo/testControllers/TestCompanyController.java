@@ -1,7 +1,7 @@
-package com.oocl.demo.testController;
+package com.oocl.demo.testControllers;
 
-import com.oocl.demo.controller.CompanyController;
-import com.oocl.demo.service.CompanyService;
+import com.oocl.demo.controllers.CompanyController;
+import com.oocl.demo.services.CompanyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CompanyController.class)
