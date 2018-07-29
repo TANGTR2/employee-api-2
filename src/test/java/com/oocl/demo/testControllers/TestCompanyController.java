@@ -1,7 +1,9 @@
 package com.oocl.demo.testControllers;
 
 import com.oocl.demo.controllers.CompanyController;
+import com.oocl.demo.entities.Company;
 import com.oocl.demo.services.CompanyService;
+import com.oocl.demo.services.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CompanyController.class)
@@ -19,7 +30,23 @@ public class TestCompanyController {
     @MockBean
     private CompanyService companyService;
 
+    @MockBean
+    private EmployeeService employeeService;
+
     @Test
     public void getCompanies_ReturnCompaniesList() throws Exception{
+        //given
+        Company company1 = new Company("alibaba",2);
+        Company company2 = new Company("tengxun",1);
+        List<Company> companies = Arrays.asList(company1, company2);
+        given(companyService.getCompaniesList()).willReturn(companies);
+        //when //then
+        mockMvc.perform(get("/companies"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name").value("alibaba"))
+                .andExpect(jsonPath("$[0].number").value(2))
+                .andExpect(jsonPath("$[1].name").value("tengxun"))
+                .andExpect(jsonPath("$[1].number").value(1));
     }
 }
