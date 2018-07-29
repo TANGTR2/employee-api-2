@@ -27,11 +27,11 @@ public class EmployeeController {
     public List<Employee> getEmployeeBygender(){
         return employeeService.getEmployeeBygender();
     }
-//
-//    @PostMapping(path = "/employees")
-//    public ArrayList<Employee> postEmployee(@RequestBody Employee employee) {
-//        return employeeService.postEmployee(employee);
-//    }
+
+    @PostMapping(path = "/employees")
+    public Employee postEmployee(@RequestBody Employee employee) {
+        return employeeService.AddEmployee(employee);
+    }
 //
 //    @PutMapping(path = "/employees/{id}")
 //    public ArrayList<Employee> putEmployeeById(@RequestBody Employee employee){

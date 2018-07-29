@@ -1,5 +1,6 @@
 package com.oocl.demo.testControllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oocl.demo.controllers.EmployeeController;
 import com.oocl.demo.entities.Employee;
 import com.oocl.demo.services.EmployeeService;
@@ -8,15 +9,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,6 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestEmployeeController {
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @MockBean
     private EmployeeService employeeService;
@@ -76,6 +84,20 @@ public class TestEmployeeController {
                 .andExpect(jsonPath("$[0].age").value(20))
                 .andExpect(jsonPath("$[0].gender").value("male"))
                 .andExpect(jsonPath("$[0].salary").value(6000));
+    }
+
+    @Test
+    public void should_return_employee_when_post_to_add_employee() throws Exception{
+        //given
+        Employee employee = new Employee("alibaba",20,"male",6000);
+        when(employeeService.AddEmployee(employee)).thenReturn(employee);
+        //when
+        ResultActions result = mockMvc.perform(post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employee)));
+        //then
+        result.andExpect(status().isOk())
+                .andDo(print());
     }
 }
 

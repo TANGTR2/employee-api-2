@@ -30,25 +30,12 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeeBygender() {
-//        ArrayList<Employee> filterList = new ArrayList<>();
-//        for (Employee employee : list) {
-//            if (employee.getGender().equals("male")) {
-//                filterList.add(employee);
-//            }
-//        }
-//        return filterList;
         return employeeRepository.findByGender("male");
     }
 
-//    public ArrayList<Employee> postEmployee(Employee employee) {
-//        Employee newEmployee = new Employee(
-//                employee.getName(),
-//                employee.getAge(),
-//                employee.getGender(),
-//                employee.getSalary());
-//        list.add(newEmployee);
-//        return list;
-//    }
+    public Employee AddEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
 //
 //    public ArrayList<Employee> updateEmployeeById(Employee employee) {
 //        for (Employee e : list) {
