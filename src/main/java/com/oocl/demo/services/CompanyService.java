@@ -18,14 +18,9 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-//    public Company getCompaniesByName(String companyName) {
-//        for(Company company:companieslist){
-//            if(company.getCompanyName().equals(companyName)){
-//                return company;
-//            }
-//        }
-//        return null;
-//    }
+    public Company getCompaniesByName(String name) {
+        return companyRepository.findByName(name);
+    }
 //
 //    public ArrayList<Employee> getCompanyEmployeesByName(String companyName) {
 //        for(Company company:companieslist){
