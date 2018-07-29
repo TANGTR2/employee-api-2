@@ -35,10 +35,10 @@ public class TestEmployeeController {
         ArrayList<Employee> employees = new ArrayList<>();
         Employee employee = new Employee("alibaba1",20,"male",6000);
         employees.add(employee);
-        //when
         given(employeeService.getEmployeesList()).willReturn(employees);
-        //then
-        mockMvc.perform(get("/employees")).andExpect(status().isOk())
+        //when //then
+        mockMvc.perform(get("/employees"))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name").value("alibaba1"))
                 .andExpect(jsonPath("$[0].age").value(20))
@@ -51,31 +51,32 @@ public class TestEmployeeController {
         //given
         long id = 1L;
         Employee employee = new Employee("alibaba",20,"male",6000);
-        //when
         given(employeeService.getEmployeeById(id)).willReturn(employee);
-        //then
-        mockMvc.perform(get("/employees/1")).andExpect(status().isOk())
+        //when //then
+        mockMvc.perform(get("/employees/1"))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("alibaba"))
                 .andExpect(jsonPath("age").value(20))
                 .andExpect(jsonPath("gender").value("male"))
                 .andExpect(jsonPath("salary").value(6000));
     }
 
-//    @Test
-//    public void getEmployeeBygender_ReturnEmployees() throws Exception{
-//        ArrayList<Employee> employees = new ArrayList<>();
-//        Employee employee1 = new Employee("alibaba1",20,"male",6000);
-//        Employee employee2 = new Employee("tengxun2",19,"female",7000);
-//        employees.add(employee1);employees.add(employee2);
-//        given(employeeService.getEmployeeBygender()).willReturn(employees);
-//
-//        mockMvc.perform(get("/employees/male")).andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].id").value(4))
-//                .andExpect(jsonPath("$[0].name").value("alibaba1"))
-//                .andExpect(jsonPath("$[0].age").value(20))
-//                .andExpect(jsonPath("$[0].gender").value("male"))
-//                .andExpect(jsonPath("$[0].salary").value(6000));
-//    }
+    @Test
+    public void getEmployeeBygender_ReturnEmployees() throws Exception{
+        //given
+        ArrayList<Employee> employees = new ArrayList<>();
+        Employee employee1 = new Employee("alibaba1",20,"male",6000);
+        employees.add(employee1);
+        given(employeeService.getEmployeeBygender()).willReturn(employees);
+        //when //then
+        mockMvc.perform(get("/employees/male"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("alibaba1"))
+                .andExpect(jsonPath("$[0].age").value(20))
+                .andExpect(jsonPath("$[0].gender").value("male"))
+                .andExpect(jsonPath("$[0].salary").value(6000));
+    }
 }
 
 

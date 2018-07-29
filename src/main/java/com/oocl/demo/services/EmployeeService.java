@@ -29,7 +29,7 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
 
-//    public ArrayList<Employee> getEmployeeBygender() {
+    public List<Employee> getEmployeeBygender() {
 //        ArrayList<Employee> filterList = new ArrayList<>();
 //        for (Employee employee : list) {
 //            if (employee.getGender().equals("male")) {
@@ -37,8 +37,9 @@ public class EmployeeService {
 //            }
 //        }
 //        return filterList;
-//    }
-//
+        return employeeRepository.findByGender("male");
+    }
+
 //    public ArrayList<Employee> postEmployee(Employee employee) {
 //        Employee newEmployee = new Employee(
 //                employee.getName(),

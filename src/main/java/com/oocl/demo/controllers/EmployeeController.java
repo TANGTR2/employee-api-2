@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EmployeeController {
@@ -24,10 +23,10 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
-//    @GetMapping(path = "/employees/male")
-//    public ArrayList<Employee> getEmployeeBygender(){
-//        return employeeService.getEmployeeBygender();
-//    }
+    @GetMapping(path = "/employees/male")
+    public List<Employee> getEmployeeBygender(){
+        return employeeService.getEmployeeBygender();
+    }
 //
 //    @PostMapping(path = "/employees")
 //    public ArrayList<Employee> postEmployee(@RequestBody Employee employee) {
