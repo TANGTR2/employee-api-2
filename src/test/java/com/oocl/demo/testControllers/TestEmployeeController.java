@@ -116,6 +116,18 @@ public class TestEmployeeController {
         result.andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @Test
+    public void should_delete_employee_when_delete_employee_by_id() throws Exception {
+        //given
+        Employee employee = new Employee(1L,"baidu",20,"male",6000);
+        when(employeeService.deleteEmployeeById(employee.getId())).thenReturn(true);
+        //when
+        ResultActions result = mockMvc.perform(delete("/employees/{1}", employee.getId()));
+        //then
+        result.andExpect(status().isOk())
+                .andDo(print());
+    }
 }
 
 

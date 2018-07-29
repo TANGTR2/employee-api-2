@@ -42,16 +42,15 @@ public class EmployeeService {
             return employeeRepository.save(employee);
         return null;
     }
-//
-//    public ArrayList<Employee> deleteEmployeeById(int id) {
-//        for (Employee e : list) {
-//            if (e.getId() == id) {
-//                list.remove(e);
-//            }
-//        }
-//        return list;
-//    }
-//
+
+    public Boolean deleteEmployeeById(Long id) {
+        if(employeeRepository.existsById(id)) {
+            int result = employeeRepository.deleteEmployeeById(id);
+            return result != 0;
+        }
+        return false;
+    }
+
 //    public ArrayList<Employee> getEmployeesByPage(int page, int pageSize) {
 //        ArrayList<Employee> dispacth = new ArrayList<>();
 //        int start = (page - 1) * pageSize;

@@ -3,6 +3,8 @@ package com.oocl.demo.controllers;
 import com.oocl.demo.entities.Employee;
 import com.oocl.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,11 +39,15 @@ public class EmployeeController {
     public Employee putEmployeeById(@PathVariable Long id,@RequestBody Employee employee){
         return employeeService.updateEmployeeById(id,employee);
     }
-//
-//    @DeleteMapping(path = "/employees/{id}")
-//    public  ArrayList<Employee> deleteEmployeeById(@PathVariable int id){
-//        return employeeService.deleteEmployeeById(id);
-//    }
+
+    @DeleteMapping(path = "/employees/{id}")
+    public  ResponseEntity deleteEmployeeById(@PathVariable Long id){
+        if (employeeService.deleteEmployeeById(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
 //
 //    @GetMapping("/employees/page/{page}/pageSize/{pageSize}")
 //    public ArrayList<Employee> getEmployeesByPage(@PathVariable int page,@PathVariable int pageSize){
