@@ -3,6 +3,8 @@ package com.oocl.demo.controllers;
 import com.oocl.demo.entities.Employee;
 import com.oocl.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +50,8 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-//
-//    @GetMapping("/employees/page/{page}/pageSize/{pageSize}")
-//    public ArrayList<Employee> getEmployeesByPage(@PathVariable int page,@PathVariable int pageSize){
-//        return  employeeService.getEmployeesByPage(page,pageSize);
-//    }
+    @GetMapping("/employees/page")
+    public List<Employee> getEmployeesByPage(@PathVariable int page,int size){
+        return  employeeService.getEmployeesByPage(PageRequest.of(page, size));
+    }
 }

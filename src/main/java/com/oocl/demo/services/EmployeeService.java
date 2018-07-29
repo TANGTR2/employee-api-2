@@ -3,11 +3,13 @@ package com.oocl.demo.services;
 import com.oocl.demo.entities.Employee;
 import com.oocl.demo.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -51,13 +53,9 @@ public class EmployeeService {
         return false;
     }
 
-//    public ArrayList<Employee> getEmployeesByPage(int page, int pageSize) {
-//        ArrayList<Employee> dispacth = new ArrayList<>();
-//        int start = (page - 1) * pageSize;
-//        int end = (start + pageSize) > list.size() ? list.size() : (start + pageSize);
-//        for (int i = start; i < end; i++) {
-//            dispacth.add(list.get(i));
-//        }
-//        return dispacth;
-//    }
+    public List<Employee> getEmployeesByPage(Pageable page) {
+        return employeeRepository.findAll(page)
+                .stream()
+                .collect(Collectors.toList());
+    }
 }
