@@ -27,9 +27,9 @@ public class CompanyController {
     public Company getCompaniesByName(@PathVariable String name){
         return companyService.getCompaniesByName(name);
     }
-//
+
 //    @GetMapping(path = "/companies/{companyName}/employees")
-//    public ArrayList<Employee> getCompanyEmployeesByName(@PathVariable String companyName){
+//    public List<Employee> getCompanyEmployeesByName(@PathVariable String companyName){
 //        return companyService.getCompanyEmployeesByName(companyName);
 //    }
 //
@@ -38,10 +38,10 @@ public class CompanyController {
 //        return  companyService.getCompaniesByPage(page,pageSize);
 //    }
 //
-//    @PostMapping(path = "/companies")
-//    public ArrayList<Company> postCompany(@RequestBody Company company) {
-//        return companyService.postCompany(company);
-//    }
+    @PostMapping(path = "/companies")
+    public Company postCompany(@RequestBody Company company) {
+        return companyService.postCompany(company);
+    }
 //
 //    @PutMapping(path = "/companies/{companyName}")
 //    public ArrayList<Company> putCompanyByName(@RequestBody Company company){

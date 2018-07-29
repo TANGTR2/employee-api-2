@@ -21,8 +21,8 @@ public class CompanyService {
     public Company getCompaniesByName(String name) {
         return companyRepository.findByName(name);
     }
-//
-//    public ArrayList<Employee> getCompanyEmployeesByName(String companyName) {
+
+//    public List<Employee> getCompanyEmployeesByName(String companyName) {
 //        for(Company company:companieslist){
 //            if(company.getCompanyName().equals(companyName)){
 //                return company.getEmployeesList();
@@ -41,10 +41,9 @@ public class CompanyService {
 //        return dispacth;
 //    }
 //
-//    public ArrayList<Company> postCompany(Company company) {
-//        companieslist.add(company);
-//        return companieslist;
-//    }
+    public Company postCompany(Company company) {
+        return companyRepository.save(company);
+    }
 //
 //    public ArrayList<Company> updateCompanyByName(Company company) {
 //        for(Company e:companieslist){

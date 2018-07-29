@@ -1,5 +1,6 @@
 package com.oocl.demo.testControllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oocl.demo.controllers.CompanyController;
 import com.oocl.demo.entities.Company;
 import com.oocl.demo.entities.Employee;
@@ -10,8 +11,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +22,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,6 +37,9 @@ public class TestCompanyController {
 
     @MockBean
     private CompanyService companyService;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @MockBean
     private EmployeeService employeeService;
@@ -66,5 +75,22 @@ public class TestCompanyController {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("alibaba"))
                 .andExpect(jsonPath("number").value(2));
+    }
+
+    @Test
+    public void should_return_company_when_post_to_add_company() throws Exception{
+        //given
+        ArrayList<Employee> employees = new ArrayList<>();
+        Employee employee = new Employee("alibaba1",20,"male",6000);
+        employees.add(employee);
+        Company company = new Company("alibaba",2,employees);
+        when(companyService.postCompany(company)).thenReturn(company);
+        //when
+        ResultActions result = mockMvc.perform(post("/companies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(company)));
+        //then
+        result.andExpect(status().isOk())
+                .andDo(print());
     }
 }
