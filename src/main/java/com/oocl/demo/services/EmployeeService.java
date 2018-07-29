@@ -36,18 +36,12 @@ public class EmployeeService {
     public Employee AddEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-//
-//    public ArrayList<Employee> updateEmployeeById(Employee employee) {
-//        for (Employee e : list) {
-//            if (e.getId() == employee.getId()) {
-//                e.setName(employee.getName());
-//                e.setAge(employee.getAge());
-//                e.setGender(employee.getGender());
-//                e.setSalary(employee.getSalary());
-//            }
-//        }
-//        return list;
-//    }
+
+    public Employee updateEmployeeById(Long id,Employee employee) {
+        if(employeeRepository.existsById(id))
+            return employeeRepository.save(employee);
+        return null;
+    }
 //
 //    public ArrayList<Employee> deleteEmployeeById(int id) {
 //        for (Employee e : list) {

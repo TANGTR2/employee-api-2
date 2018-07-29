@@ -17,10 +17,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,6 +96,22 @@ public class TestEmployeeController {
         ResultActions result = mockMvc.perform(post("/employees")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(employee)));
+        //then
+        result.andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void should_return_employee_when_put_employee() throws Exception{
+        //given
+        Employee employee = new Employee(1L,"baidu",20,"male",6000);
+        when(employeeService.updateEmployeeById(anyLong(), any(Employee.class))).thenReturn(employee);
+        //when
+        ResultActions result = mockMvc.perform(put("/employees/{1}", employee.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(employee))
+                );
+
         //then
         result.andExpect(status().isOk())
                 .andDo(print());

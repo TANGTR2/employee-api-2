@@ -32,11 +32,11 @@ public class EmployeeController {
     public Employee postEmployee(@RequestBody Employee employee) {
         return employeeService.AddEmployee(employee);
     }
-//
-//    @PutMapping(path = "/employees/{id}")
-//    public ArrayList<Employee> putEmployeeById(@RequestBody Employee employee){
-//        return employeeService.updateEmployeeById(employee);
-//    }
+
+    @PutMapping(path = "/employees/{id}")
+    public Employee putEmployeeById(@PathVariable Long id,@RequestBody Employee employee){
+        return employeeService.updateEmployeeById(id,employee);
+    }
 //
 //    @DeleteMapping(path = "/employees/{id}")
 //    public  ArrayList<Employee> deleteEmployeeById(@PathVariable int id){
