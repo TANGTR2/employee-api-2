@@ -44,24 +44,17 @@ public class CompanyService {
     public Company postCompany(Company company) {
         return companyRepository.save(company);
     }
-//
-//    public ArrayList<Company> updateCompanyByName(Company company) {
-//        for(Company e:companieslist){
-//            if(e.getCompanyName().equals(company.getCompanyName())){
-//                e.setCompanyName(company.getCompanyName());
-//                e.setEmployeesNumber(company.getEmployeesNumber());
-//                e.setEmployeesList(company.getEmployeesList());
-//            }
-//        }
-//        return companieslist;
+
+//    public Company updateCompanyByName(Company company,String name) {
+//        companyRepository.findByName(name);
+//        companyRepository.save(company);
 //    }
-//
-//    public ArrayList<Company> deleteCompanyByName(String companyName) {
-//        for(Company e:companieslist){
-//            if(e.getCompanyName().equals(companyName)){
-//                companieslist.remove(e);
-//            }
-//        }
-//        return companieslist;
-//    }
+
+    public Boolean deleteCompanyByName(String companyName) {
+        if(companyRepository.existsByName(companyName)) {
+            int result = companyRepository.deleteCompanyByName(companyName);
+            return result != 0;
+        }
+        return false;
+    }
 }

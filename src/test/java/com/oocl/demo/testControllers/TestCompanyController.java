@@ -21,10 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -93,4 +94,17 @@ public class TestCompanyController {
         result.andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @Test
+    public void should_delete_company_when_delete_company_by_name() throws Exception {
+        //given
+        Company company1 = new Company("alibaba",2);
+        when(companyService.deleteCompanyByName(company1.getName())).thenReturn(true);
+        //when
+        ResultActions result = mockMvc.perform(delete("/companies/alibaba", company1.getName()));
+        //then
+        result.andExpect(status().isOk())
+                .andDo(print());
+    }
+
 }

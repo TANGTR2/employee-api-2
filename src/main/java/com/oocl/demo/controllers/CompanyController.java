@@ -5,6 +5,8 @@ import com.oocl.demo.entities.Employee;
 import com.oocl.demo.services.CompanyService;
 import com.oocl.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,15 +44,18 @@ public class CompanyController {
     public Company postCompany(@RequestBody Company company) {
         return companyService.postCompany(company);
     }
-//
+
 //    @PutMapping(path = "/companies/{companyName}")
-//    public ArrayList<Company> putCompanyByName(@RequestBody Company company){
-//        return companyService.updateCompanyByName(company);
+//    public Company putCompanyByName(@RequestBody Company company,@PathVariable String name){
+//        return companyService.updateCompanyByName(company,name);
 //    }
-//
-//    @DeleteMapping(path = "/companies/{companyName}")
-//    public ArrayList<Company> deleteCompanyByName(@PathVariable String companyName){
-//        return companyService.deleteCompanyByName(companyName);
-//    }
+
+    @DeleteMapping(path = "/companies/{name}")
+    public ResponseEntity deleteCompanyByName(@PathVariable String name){
+        if (companyService.deleteCompanyByName(name)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 
 }
